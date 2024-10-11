@@ -15,6 +15,7 @@ from appp.smiles import smiles_list
 
 with open('token.txt', 'r') as f: TOKEN = f.readline()
 bot = Bot(token=TOKEN)
+
 router = Router()
 day = 582
 now = datetime.now()

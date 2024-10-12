@@ -24,8 +24,6 @@ scheduler = AsyncIOScheduler(timezone='Europe/Moscow')
 loop = asyncio.get_event_loop()
 
 # Стартовая комманда, открывает меню.
-
-
 @router.message(F.text == '/start')
 async def cmd_start(message: Message):
     await message.answer('Добро пожаловать!', reply_markup=kb.main)
@@ -57,15 +55,9 @@ async def do_job(message: Message):
         await asyncio.sleep(1)
 
 # Завершение ежедневной рассылки.
-# @router.message(F.text == '\U0001F6AB Завершить рассылку')
-# def stop_schedule_job(message: Message):
-#    scheduler.shutdown(wait=False)
-#    loop.stop()
-
-
 @router.message(F.text == '\U0001F6AB Завершить рассылку')
-async def stop_bot(message: Message):
-    await bot.close()
+async def stop_schedule_job(message: Message):
+    await scheduler.shutdown(wait=False)
 
 # Список ссылок социальных сетей для будущей работы в IT.
 

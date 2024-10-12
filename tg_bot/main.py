@@ -11,7 +11,6 @@ with open('token.txt', 'r') as f:
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 dp.include_router(router)
-loop = asyncio.get_event_loop()
 
 # Polling - постоянная работа бота.
 async def main():

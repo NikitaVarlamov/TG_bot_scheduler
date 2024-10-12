@@ -20,8 +20,8 @@ router = Router()
 day = 582
 now = datetime.now()
 weekday = datetime.isoweekday(now)
-scheduler = AsyncIOScheduler(timezone='Europe/Moscow')
-loop = asyncio.get_event_loop()
+scheduler = AsyncIOScheduler(timezone='Asia/Yekaterinburg')
+
 
 # Стартовая комманда, открывает меню.
 @router.message(F.text == '/start')
@@ -47,35 +47,28 @@ async def send_message_cron():
 
 @router.message(F.text == '\U000023F0 Начать рассылку')
 async def do_job(message: Message):
-    scheduler = AsyncIOScheduler()
-    scheduler.add_job(send_message_cron, trigger='cron',
-                      minute='*', start_date=datetime.now())
+    scheduler = AsyncIOScheduler(timezone='Asia/Yekaterinburg')
+    scheduler.add_job(send_message_cron, trigger='cron', hour='21', minute='*', start_date=datetime.now())
     scheduler.start()
     while True:
         await asyncio.sleep(1)
-
+    
 # Завершение ежедневной рассылки.
 @router.message(F.text == '\U0001F6AB Завершить рассылку')
 async def stop_schedule_job(message: Message):
     await scheduler.shutdown(wait=False)
 
 # Список ссылок социальных сетей для будущей работы в IT.
-
-
 @router.message(F.text == 'Соц.сети')
 async def social_net(message: Message):
     await message.answer('Рабочие соцсети', reply_markup=kb.social)
 
 # Список ссылок для учёбы в MathsHub.
-
-
 @router.message(F.text == 'Учеба')
 async def study(message: Message):
     await message.answer('Учебные ссылки', reply_markup=kb.study)
 
 # Эхо-функция для ответа на несуществующие запросы.
-
-
 @router.message()
 async def echo(message: Message):
     await asyncio.sleep(10)

@@ -5,17 +5,12 @@
 ## Технологии
 - [aiogram](https://aiogram.dev/)
 - [asyncio](https://docs.python.org/3/library/asyncio.html#module-asyncio)
-
-## Использование
-Бот @ed_challenge_bot (https://t.me/ed_challenge_bot)
-Весь функционал в меню бота.
+- requirements.txt - полный необходимый список пакетов 
 
 ## Разработка
 ### main
   Создание бота
 ### appp
-- frases.dic и smiles для хранения вариантов текста сообщения в зависимости от дня недели
-- keyboard интерфейс меню бота
-- handlers исполнительные комманды
-### .venv
-  Виртуальная среда
+- *frases.dic и smiles*   для хранения вариантов текста сообщения в зависимости от дня недели
+- *keyboard*              интерфейс меню бота
+- *handlers*              исполнительные комманды

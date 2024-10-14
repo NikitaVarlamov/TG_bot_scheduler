@@ -4,11 +4,8 @@ from datetime import datetime
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 import asyncio
-import aioschedule
-
 import random
 import appp.keyboard as kb
-
 from appp.frases_dic import frases_dic
 from appp.smiles import smiles_list
 

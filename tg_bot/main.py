@@ -1,24 +1,36 @@
 import asyncio
 from aiogram import Bot, Dispatcher
 from appp.handlers import router
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-from appp import handlers
+# Function to safely retrieve the bot token
+def get_bot_token():
+    try:
+        with open('token.txt', 'r') as f:
+            return f.readline().strip()
+    except FileNotFoundError:
+        raise RuntimeError("Token file not found. Please provide a valid token file.")
 
-
-with open('token.txt', 'r') as f:
-    TOKEN = f.readline()
+# Initialize bot and dispatcher
+TOKEN = get_bot_token()
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 dp.include_router(router)
 
-# Polling - постоянная работа бота.
-async def main():
-    await dp.start_polling(bot)
 
-# def main() запускается только с этого файла.
+# Polling - continuous work loop for the bot
+async def main():
+    try:
+        # Start polling
+        await dp.start_polling(bot)
+    finally:
+        # Ensure resources are properly cleaned up
+        await bot.session.close()
+        print("Bot shut down gracefully.")
+
+
+# Run main() if the script is executed directly
 if __name__ == '__main__':
     try:
         asyncio.run(main())
-    except (AttributeError, KeyboardInterrupt, SystemExit):
-        pass
+    except (KeyboardInterrupt, SystemExit):
+        print("Bot stopped due to user interrupt or system exit.")

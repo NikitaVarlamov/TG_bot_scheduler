@@ -10,7 +10,7 @@ from appp.smiles import smiles_list
 
 # Initialize bot
 def get_bot_token():
-    with open('token.txt', 'r') as f:
+    with open('scheduler bot/token_2.txt', 'r') as f:
         return f.readline().strip()
 
 TOKEN = get_bot_token()

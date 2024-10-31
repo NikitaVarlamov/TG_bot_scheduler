@@ -5,7 +5,7 @@ from appp.handlers import router
 # Function to safely retrieve the bot token
 def get_bot_token():
     try:
-        with open('token.txt', 'r') as f:
+        with open('scheduler bot/token_2.txt', 'r') as f:
             return f.readline().strip()
     except FileNotFoundError:
         raise RuntimeError("Token file not found. Please provide a valid token file.")
